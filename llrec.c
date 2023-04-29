@@ -24,6 +24,7 @@ llrec *init_llrec()
 {
     llrec *l = (llrec*) calloc(1, sizeof(llrec));
     l->head = NULL;
+    l->size = 0;
     
     return l;
 }
@@ -39,8 +40,35 @@ void add_data(llrec *l, int data)
         node *tmp = init_node(data, NULL);
         add_node_next(l->head, tmp);
     }
+    (l->size)++;
 }
 
+
+void insert_data(llrec *l, int data, int index)
+{
+    node *n = init_node(data, NULL);
+    insert_node(l, n, index);
+}
+
+
+
+void insert_node(llrec *l, node *n, int index)
+{
+    if (index < 0 || index >= l->size) {
+        printf("Error! Index is out of bounds!\n");
+    }
+    else if (index == 0){
+        n->next = l->head;
+        l->head = n;
+        (l->size)++;
+    }
+    else {
+        node *prev = get_node(l, index - 1);
+        n->next = prev->next;
+        prev->next = n;
+        (l->size)++;
+    }
+}
 
 
 void add_node_next(node *n1, node *n2)
@@ -52,7 +80,7 @@ void add_node_next(node *n1, node *n2)
 }
 
 
-int remove_data(llrec *l)
+int remove_last_data(llrec *l)
 {
     return remove_last_node(l);
 }
@@ -66,6 +94,7 @@ int remove_last_node(llrec *l)
         int data = l->head->data;
         free(l->head);
         l->head = NULL;
+        (l->size)--;
         return data;
     }
     else {
@@ -73,6 +102,7 @@ int remove_last_node(llrec *l)
         int data = tmp->next->data;
         free(tmp->next);
         tmp->next = NULL;
+        (l->size)--;
         return data;
     }
 }
@@ -84,6 +114,55 @@ node *pre_last_node(node *n)
         return n;
     else
         return pre_last_node(n->next);
+}
+
+
+int remove_data(llrec *l, int index)
+{
+    if (index < 0 || index >= l->size) {
+        fprintf(stderr, "Error! Index is out of bounds!\n");
+        return -1;
+    }
+    else {
+        return remove_node(l, index);
+    }
+}
+
+
+int remove_node(llrec *l, int index)
+{
+    if (index == 0) {
+        node *tmp = l->head;
+        l->head = tmp->next;
+        int data = tmp->data;
+        free(tmp);
+        (l->size)--;
+        return data;
+    }
+    else {
+        node *prev = get_node(l, index-1);
+        node *tmp = prev->next;
+        prev->next = tmp->next;
+        int data = tmp->data;
+        free(tmp);
+        (l->size)--;
+        return data;
+    }
+}
+
+
+node *get_node(llrec *l, int index)
+{
+    return _get_node(l->head, index);
+}
+
+
+node *_get_node(node *n, int index)
+{
+    if (index == 0)
+        return n;
+    else
+        return _get_node(n->next, index - 1);
 }
 
 

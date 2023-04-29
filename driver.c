@@ -20,7 +20,7 @@ int main()
 
     /* Remove 3 data from l */
     for (i = 0; i < 3; i++)
-        printf("%d is removed from l\n", remove_data(l));
+        printf("%d is removed from l\n", remove_last_data(l));
 
     /* Print l after deletion items */
     printf("\n\nThe llrec after deletion:\n");
@@ -29,7 +29,7 @@ int main()
     
     /* Remove the rest of l */ 
     for (i = 0; i < 7; i++)
-        printf("%d is removed from l\n", remove_data(l));
+        printf("%d is removed from l\n", remove_last_data(l));
 
     /* Print l after deletion items */
     printf("\n\nThe llrec after deletion:\n");
@@ -41,11 +41,16 @@ int main()
         add_data(l, 10*i);
 
     /* Print l after adding items */
-    printf("\n\nThe llrec before deallocation:\n");
+    printf("\n\nThe llrec before deletion:\n");
     print_llrec(l);
 
+    remove_data(l, 5);
+    printf("\n\nThe llrec after deletion:\n");
+    print_llrec(l);
 
-
+    insert_data(l, 15, 5);
+    printf("\n\nThe llrec after insertion:\n");
+    print_llrec(l);
 
 
     /* free the memory of l */
