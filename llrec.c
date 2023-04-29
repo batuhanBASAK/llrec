@@ -32,8 +32,9 @@ llrec *init_llrec()
 
 void add_data(llrec *l, int data)
 {
-    if (l->head == NULL)
+    if (l->head == NULL) {
         l->head = init_node(data, NULL);
+    }
     else {
         node *tmp = init_node(data, NULL);
         add_node_next(l->head, tmp);

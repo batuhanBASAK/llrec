@@ -19,6 +19,7 @@ typedef struct node_t {
     struct node_t *next;
 }node;
 
+
 typedef struct llrec_t {
     node *head;
 }llrec;
@@ -115,6 +116,9 @@ void _print_llrec(node *n);
  *
  */
 void deallocate_llrec(llrec **lp);
+
+
+
 
 
 #endif
