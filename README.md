@@ -1,2 +1,2 @@
 # llrec
-A basic linked list data type implemented recursively in c.
+A basic linked list data type implementation recursively in c.
