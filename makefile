@@ -1,7 +1,7 @@
 all: clear clean compile run
 
 clean:
-	@rm -rf driver
+	@rm -rf driver driver.o llrec.o
 
 clear:
 	@clear
